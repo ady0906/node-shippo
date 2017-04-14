@@ -4,6 +4,7 @@
   "description": "A simple app to get familiar with Shippo",
   "main": "index.js",
   "scripts": {
+    "start"
     "test": "test"
   },
   "repository": {
