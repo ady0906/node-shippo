@@ -1,5 +1,5 @@
 const config = require('./config');
-const shippo = require('shippo')('<YOUR_PRIVATE_KEY>');
+const shippo = require('shippo')(config.shippo.token);
 
 class ProviderAbstract {
 
