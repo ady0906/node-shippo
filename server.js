@@ -10,20 +10,20 @@ class ProviderAbstract {
     this.options = {
       url: "https://api.goshippo.com/shipments/",
       headers: {
-        "Authorization": `ShippoToken ${config.shippo.token}`,
+        "Authorization": `ShippoToken ${config.shippo.token}`, // get it to work without displaying on server file
         "Content-Type": "application/json"
       },
       data: {
-        "address_to": {
-          "name": "Romain Peynichou",
-          "street1": "3878 St Laurent Blvd",
-          "city": "Montreal",
-          "state": "QC",
-          "zip": "H2W1Y2",
-          "country": "CA",
-          "phone": "5146773006",
-          "email": "romainpeynichou@gmail.com"
-        },
+        // "address_to": {
+        //   "name": "Romain Peynichou",
+        //   "street1": "3878 St Laurent Blvd",
+        //   "city": "Montreal",
+        //   "state": "QC",
+        //   "zip": "H2W1Y2",
+        //   "country": "CA",
+        //   "phone": "5146773006",
+        //   "email": "romainpeynichou@gmail.com"
+        // },
         "async": false,
         "customs_declaration": {
           "contents_type": "MERCHANDISE",
@@ -60,7 +60,20 @@ class ProviderAbstract {
   }
 
   getRates(addressObject) {
-    // to be implemented
+    this.options.data['address_from'] = addressObject;
+
+    function callback(error, response, body) {
+      if (response.statusCode == 200) {
+        let resultsArray = (JSON.parse(response.body)).results;
+        let ratesArray = [];
+
+        resultsArray.forEach(function(element) {
+          ratesArray.push(element['rates'])
+        })
+        console.log(ratesArray);
+      }
+    }
+    request(this.options, callback);
   }
 
 }
