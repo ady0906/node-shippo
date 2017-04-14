@@ -1,4 +1,4 @@
-
+const shippo = require('shippo')('<YOUR_PRIVATE_KEY>');
 
 class ProviderAbstract {
 
@@ -16,7 +16,19 @@ class CanadaPostProvider extends ProviderAbstract {
   // to be implemented
 }
 
-const myAddress = {} // structure of the object to be defined
+const myAddress = {
+  "name":
+  "company":
+  "street_no":
+  "street1":
+  "street2":
+  "city":
+  "state":
+  "zip":
+  "country":
+  "phone":
+  "email":
+} // structure of the object to be defined
 
 const myCPInstance = new CanadaPostProvider('my-shippo-token')
 
