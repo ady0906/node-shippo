@@ -6,7 +6,12 @@ const https = require('https');
 class ProviderAbstract {
 
   constructor() {
-    // to be implemented
+    const options = {
+      hostname: "api.goshippo.com",
+      path: "/shipments",
+      headers: {Authorization: `ShippoToken ${config.shippo.token}`}
+    }
+    return options;
   }
 
   getRates(addressObject) {
