@@ -1,0 +1,19 @@
+{
+  "name": "node-shippo",
+  "version": "1.0.0",
+  "description": "A simple app to get familiar with Shippo",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ady0906/node-shippo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ady0906/node-shippo/issues"
+  },
+  "homepage": "https://github.com/ady0906/node-shippo#readme"
+}
