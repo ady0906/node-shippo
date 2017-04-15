@@ -26,7 +26,7 @@ class ProviderAbstract {
           "phone": "5146773006",
           "email": "romainpeynichou@gmail.com"
         },
-        "async": false,      
+        "async": false,
         "parcels": [
           {
             "length": "5",
@@ -61,7 +61,15 @@ class ProviderAbstract {
 }
 
 class CanadaPostProvider extends ProviderAbstract {
-  // to be implemented
+
+  constructor() {
+    super();
+  }
+
+  isCanadaPost(rate) {
+    return rate.provider == "Canada Post";
+  }
+
 }
 
 const myAddress = {
@@ -73,7 +81,7 @@ const myAddress = {
   "country": "CA",
   "phone": "6475343354",
   "email": "adrien.peynichou@gmail.com"
-} // structure of the object to be defined
+}
 
 const myCPInstance = new CanadaPostProvider(config.shippo.token)
 
