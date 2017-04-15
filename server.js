@@ -49,7 +49,6 @@ class ProviderAbstract {
     let callback = (error, response, body) => {
       if (response.statusCode == 201) {
         let ratesArray = [body.rates][0];
-        // console.log(ratesArray);
         return ratesArray;
       } else {
         console.log(response.statusCode);
@@ -64,12 +63,13 @@ class CanadaPostProvider extends ProviderAbstract {
 
   constructor() {
     super();
-    this.rates = super.getRates(addressObject);
+    this.rates = super.getRates;
       // return (super.getRates(addressObject)).filter((rate) => {return rate.provider == "Canada Post"});
     }
 
     getRates(addressObject) {
-      return (this.rates).filter((rate) => {return rate.provider == "Canada Post"});
+      console.log(this.rates(addressObject));
+      // return (this.rates).filter((rate) => {return rate.provider == "Canada Post"});
     }
   }
 
