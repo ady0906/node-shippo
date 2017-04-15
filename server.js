@@ -59,25 +59,20 @@ class ProviderAbstract {
         ]
       }
     }
+
   }
 
   getRates(addressObject) {
+
     this.options.body['address_from'] = addressObject;
 
-    function callback(error, response, body) {
-      if (response.statusCode == 200) {
-        let resultsArray = (response.body).results; // (JSON.parse(response.body)).results;
-        console.log(JSON.stringify(response))
-
-        let ratesArray = [];
-
-        resultsArray.forEach(function(element) {
-          ratesArray.push(element['rates'])
-        })
-        // console.log(ratesArray);
+    let callback = (error, response, body) => {
+      if (response.statusCode == 201) {
+        let ratesArray = [body.rates][0];
+        console.log(ratesArray);
+        return ratesArray;
       } else {
         console.log(response.statusCode);
-        console.log(response.body)
       }
     }
     request(this.options, callback);
