@@ -70,6 +70,10 @@ class CanadaPostProvider extends ProviderAbstract {
     return rate.provider == "Canada Post";
   }
 
+  getRates(ble) {
+    console.log('ble');
+  }
+
 }
 
 const myAddress = {
