@@ -9,21 +9,22 @@ class ProviderAbstract {
   constructor() {
     this.options = {
       url: "https://api.goshippo.com/shipments/",
+      method: "POST",
       headers: {
         "Authorization": `ShippoToken ${config.shippo.token}`,
         "Content-Type": "application/json"
       },
       data: {
-        // "address_to": {
-        //   "name": "Romain Peynichou",
-        //   "street1": "3878 St Laurent Blvd",
-        //   "city": "Montreal",
-        //   "state": "QC",
-        //   "zip": "H2W1Y2",
-        //   "country": "CA",
-        //   "phone": "5146773006",
-        //   "email": "romainpeynichou@gmail.com"
-        // },
+        "address_to": {
+          "name": "Romain Peynichou",
+          "street1": "3878 St Laurent Blvd",
+          "city": "Montreal",
+          "state": "QC",
+          "zip": "H2W1Y2",
+          "country": "CA",
+          "phone": "5146773006",
+          "email": "romainpeynichou@gmail.com"
+        },
         "async": false,
         "customs_declaration": {
           "contents_type": "MERCHANDISE",
@@ -64,15 +65,18 @@ class ProviderAbstract {
 
     function callback(error, response, body) {
       if (response.statusCode == 200) {
-        let resultsArray = (JSON.parse(response.body)).results;
+        let resultsArray = (response.body).results; // (JSON.parse(response.body)).results;
+        console.log(JSON.stringify(response))
+
         let ratesArray = [];
 
         resultsArray.forEach(function(element) {
           ratesArray.push(element['rates'])
         })
-        console.log(ratesArray);
+        // console.log(ratesArray);
       } else {
         console.log(response.statusCode);
+        console.log(JSON.stringify(response))
       }
     }
     request(this.options, callback);
