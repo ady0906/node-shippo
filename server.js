@@ -10,11 +10,12 @@ class ProviderAbstract {
     this.options = {
       url: "https://api.goshippo.com/shipments/",
       method: "POST",
+      json: true,
       headers: {
         "Authorization": `ShippoToken ${config.shippo.token}`,
         "Content-Type": "application/json"
       },
-      data: {
+      body: {
         "address_to": {
           "name": "Romain Peynichou",
           "street1": "3878 St Laurent Blvd",
@@ -61,7 +62,7 @@ class ProviderAbstract {
   }
 
   getRates(addressObject) {
-    this.options.data['address_from'] = addressObject;
+    this.options.body['address_from'] = addressObject;
 
     function callback(error, response, body) {
       if (response.statusCode == 200) {
@@ -76,7 +77,7 @@ class ProviderAbstract {
         // console.log(ratesArray);
       } else {
         console.log(response.statusCode);
-        console.log(JSON.stringify(response))
+        console.log(response.body)
       }
     }
     request(this.options, callback);
