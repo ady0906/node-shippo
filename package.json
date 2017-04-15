@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ady0906/node-shippo/issues"
   },
-  "homepage": "https://github.com/ady0906/node-shippo#readme"
+  "homepage": "https://github.com/ady0906/node-shippo#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0"
+  }
 }

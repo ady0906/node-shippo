@@ -1,8 +1,8 @@
+require('dotenv').config()
 const config = require('./config');
 const https = require('https');
 const request = require('request');
 
-// cannot use shippo SDK library
 
 class ProviderAbstract {
 
@@ -10,7 +10,7 @@ class ProviderAbstract {
     this.options = {
       url: "https://api.goshippo.com/shipments/",
       headers: {
-        "Authorization": `ShippoToken ${config.shippo.token}`, // get it to work without displaying on server file
+        "Authorization": `ShippoToken ${config.shippo.token}`,
         "Content-Type": "application/json"
       },
       data: {
@@ -71,6 +71,8 @@ class ProviderAbstract {
           ratesArray.push(element['rates'])
         })
         console.log(ratesArray);
+      } else {
+        console.log(response.statusCode);
       }
     }
     request(this.options, callback);
