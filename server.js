@@ -26,27 +26,7 @@ class ProviderAbstract {
           "phone": "5146773006",
           "email": "romainpeynichou@gmail.com"
         },
-        "async": false,
-        "customs_declaration": {
-          "contents_type": "MERCHANDISE",
-          "contents_explanation": "Shipping ain't easy!",
-          "non_delivery_option": "RETURN",
-          "certify": true,
-          "certify_signer": "Shippo",
-          "items": [
-            {
-              "description": "My Parcel",
-              "quantity": 1,
-              "net_weight": "2",
-              "mass_unit": "lb",
-              "value_amount": 13.37,
-              "value_currency": "USD",
-              "metadata": "Your first Customs Item",
-              "origin_country": "US"
-            }
-          ],
-          "metadata": "Your first Customs Declaration!"
-        },
+        "async": false,      
         "parcels": [
           {
             "length": "5",
