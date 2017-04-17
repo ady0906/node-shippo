@@ -25,12 +25,10 @@ describe('Response Object', function() {
     chai.request('https://api.goshippo.com')
       .post('/shipments/')
       .send({
-        url: "https://api.goshippo.com/shipments/",
-        method: "POST",
         json: true,
         headers: {
-          "Content-Type": "application/json",
-          "Authorization": `ShippoToken ${testShippo}`
+          "Authorization": `ShippoToken ${testShippo}`,
+          "Content-Type": "application/json"
         },
         body: {
           "address_to": {
