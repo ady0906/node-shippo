@@ -51,10 +51,10 @@ class ProviderAbstract {
 
     request(this.options, (error, response, body) => {
       if (response.statusCode == 201) {
-        let ratesArray = [body.rates][0];        
+        let ratesArray = [body.rates][0];
         this.getRatesCallback(ratesArray);
       } else {
-        this.getRatesCallback(response.statusCode);
+        console.log(response.statusCode);
       }
     });
 
@@ -67,14 +67,19 @@ class CanadaPostProvider extends ProviderAbstract {
 
   constructor() {
     super();
-    // this.rates = super.getRates;
-    this.getRatesCallback = (arr) => { console.log(arr) };
+    this.getRatesCallback = (arr) => {
+      let canadaRates = [];
+      arr.forEach((element) => {
+        if (element['provider'] == 'Canada Post') {
+          canadaRates.push(element);
+        }
+      })
+      console.log(canadaRates);
+    };
   }
 
     getXRates(addressObject) {
-
       this.rates(addressObject);
-
     }
   }
 
