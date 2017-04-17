@@ -50,6 +50,7 @@ class ProviderAbstract {
       if (response.statusCode == 201) {
         let ratesArray = [body.rates][0];
         return ratesArray;
+        // console.log(ratesArray);
       } else {
         console.log(response.statusCode);
       }
@@ -68,10 +69,19 @@ class CanadaPostProvider extends ProviderAbstract {
     }
 
     getRates(addressObject) {
-      (this.rates(addressObject), () => {
-        let workArray = this.rates(addressObject);
-        console.log(workArray);
-      });
+      let myCallback = (data) => {
+        console.log(data);
+      };
+
+      let usingItNow = (callback) => {
+        callback(this.rates(addressObject));
+      };
+
+      usingItNow(myCallback);
+      // setTimeout(() => {console.log(workArray)}, 10000);
+      // this.rates(addressObject, (error, result) => {
+      //   console.log(result);
+      // });
       // console.log(this.rates(addressObject));
       // return (this.rates).filter((rate) => {return rate.provider == "Canada Post"});
     }
