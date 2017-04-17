@@ -7,6 +7,9 @@ const request = require('request');
 class ProviderAbstract {
 
   constructor() {
+
+    this.getRatesCallback = () => {}
+
     this.options = {
       url: "https://api.goshippo.com/shipments/",
       method: "POST",
@@ -46,16 +49,16 @@ class ProviderAbstract {
 
     this.options.body['address_from'] = addressObject;
 
-    let callback = (error, response, body) => {
+    request(this.options, (error, response, body) => {
       if (response.statusCode == 201) {
-        let ratesArray = [body.rates][0];
-        return ratesArray;
-        // console.log(ratesArray);
+        let ratesArray = [body.rates][0];        
+        this.getRatesCallback(ratesArray);
       } else {
-        console.log(response.statusCode);
+        this.getRatesCallback(response.statusCode);
       }
-    }
-    request(this.options, callback);
+    });
+
+
   }
 
 }
@@ -64,26 +67,14 @@ class CanadaPostProvider extends ProviderAbstract {
 
   constructor() {
     super();
-    this.rates = super.getRates;
-      // return (super.getRates(addressObject)).filter((rate) => {return rate.provider == "Canada Post"});
-    }
+    // this.rates = super.getRates;
+    this.getRatesCallback = (arr) => { console.log(arr) };
+  }
 
-    getRates(addressObject) {
-      let myCallback = (data) => {
-        console.log(data);
-      };
+    getXRates(addressObject) {
 
-      let usingItNow = (callback) => {
-        callback(this.rates(addressObject));
-      };
+      this.rates(addressObject);
 
-      usingItNow(myCallback);
-      // setTimeout(() => {console.log(workArray)}, 10000);
-      // this.rates(addressObject, (error, result) => {
-      //   console.log(result);
-      // });
-      // console.log(this.rates(addressObject));
-      // return (this.rates).filter((rate) => {return rate.provider == "Canada Post"});
     }
   }
 
@@ -101,4 +92,5 @@ const myAddress = {
 
 const myCPInstance = new CanadaPostProvider(config.shippo.token)
 
-myCPInstance.getRates(myAddress) // should return an array of available rates
+// const rates = myCPInstance.getRates(myAddress) should return an array of available rates
+myCPInstance.getRates(myAddress);
