@@ -22,7 +22,7 @@ class ProviderAbstract {
           "city": "Montreal",
           "state": "QC",
           "zip": "H2W1Y2",
-          "country": "CA",
+          "country": "CA"
         },
         "async": false,
         "parcels": [
@@ -47,6 +47,9 @@ class ProviderAbstract {
       if (response.statusCode == 201) {
         let ratesArray = [body.rates][0];
         this.getRatesCallback(ratesArray);
+      } else if (response.statusCode == 401) {
+        console.log(response.statusCode);
+        console.log('You failed to authenticate');
       } else {
         console.log(response.statusCode);
       }
