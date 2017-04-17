@@ -1,11 +1,12 @@
 require('dotenv').config()
+const express = require('express');
 const config = require('./config');
 const request = require('request');
 
 
 class ProviderAbstract {
 
-  constructor() {    
+  constructor() {
 
     this.options = {
       url: "https://api.goshippo.com/shipments/",
@@ -22,8 +23,6 @@ class ProviderAbstract {
           "state": "QC",
           "zip": "H2W1Y2",
           "country": "CA",
-          "phone": "5146773006",
-          "email": "romainpeynichou@gmail.com"
         },
         "async": false,
         "parcels": [
@@ -84,11 +83,15 @@ const myAddress = {
   "city": "East York",
   "state": "ON",
   "zip": "M4J2V4",
-  "country": "CA",
-  "phone": "6475343354",
-  "email": "adrien.peynichou@gmail.com"
+  "country": "CA"
 }
 
 const myCPInstance = new CanadaPostProvider(config.shippo.token)
 
 myCPInstance.getRates(myAddress); // should return an array of available rates
+
+module.exports = {
+  ProviderAbstract: ProviderAbstract,
+  CanadaPostProvider: CanadaPostProvider,
+  myAddress: myAddress
+};
