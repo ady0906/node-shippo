@@ -5,9 +5,7 @@ const request = require('request');
 
 class ProviderAbstract {
 
-  constructor() {
-
-    // this.getRatesCallback = () => {};
+  constructor() {    
 
     this.options = {
       url: "https://api.goshippo.com/shipments/",
@@ -70,8 +68,12 @@ class CanadaPostProvider extends ProviderAbstract {
           canadaRates.push(element);
         }
       })
-      console.log(canadaRates);
-      return canadaRates;
+      if (canadaRates.length == 0) {
+        console.log("No Canada Post rates are available for this shipment.")
+      } else {
+        console.log(canadaRates);
+        return canadaRates;
+      }
     };
   }
 }
