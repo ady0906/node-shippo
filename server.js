@@ -73,11 +73,6 @@ class CanadaPostProvider extends ProviderAbstract {
       console.log(canadaRates);
       return canadaRates;
     };
-
-  }
-
-  getXRates(addressObject) {
-    this.rates(addressObject);
   }
 }
 
