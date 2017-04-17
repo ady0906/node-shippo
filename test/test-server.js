@@ -1,8 +1,8 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const should = chai.should();
 const server = require('../server');
 const config = require('../config');
+const should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -20,8 +20,8 @@ describe('Address Object', function() {
 });
 
 describe('Response Object', function() {
-  let testShippo = config.shippo.test;
-  it('should be an array of objects', function(done) {
+  let testShippo = '';
+  it('should return an authentication error if the Shippo token is invalid', (done) => {
     chai.request('https://api.goshippo.com')
       .post('/shipments/')
       .send({
@@ -61,8 +61,8 @@ describe('Response Object', function() {
         }
       })
       .end((error, response) => {
-        response.statusCode.should.equal(201);
+        response.statusCode.should.equal(401);
         done();
       })
     })
-  })
+  });

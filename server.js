@@ -37,6 +37,7 @@ class ProviderAbstract {
         ]
       }
     }
+
   }
 
   getRates(addressObject) {
@@ -48,13 +49,13 @@ class ProviderAbstract {
         let ratesArray = [body.rates][0];
         this.getRatesCallback(ratesArray);
       } else if (response.statusCode == 401) {
-        console.log(response.statusCode);
-        console.log('You failed to authenticate');
+        console.log(response.statusCode, 'you failed to authenticate');
       } else {
         console.log(response.statusCode);
       }
     });
   }
+
 }
 
 class CanadaPostProvider extends ProviderAbstract {
@@ -78,6 +79,7 @@ class CanadaPostProvider extends ProviderAbstract {
       }
     };
   }
+  
 }
 
 const myAddress = {
@@ -91,7 +93,7 @@ const myAddress = {
 
 const myCPInstance = new CanadaPostProvider(config.shippo.token)
 
-myCPInstance.getRates(myAddress); // should return an array of available rates
+myCPInstance.getRates(myAddress);
 
 module.exports = {
   ProviderAbstract: ProviderAbstract,
