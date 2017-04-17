@@ -1,6 +1,5 @@
 require('dotenv').config()
 const config = require('./config');
-const https = require('https');
 const request = require('request');
 
 
@@ -8,14 +7,13 @@ class ProviderAbstract {
 
   constructor() {
 
-    this.getRatesCallback = () => {}
+    // this.getRatesCallback = () => {};
 
     this.options = {
       url: "https://api.goshippo.com/shipments/",
       method: "POST",
       json: true,
       headers: {
-        "Authorization": `ShippoToken ${config.shippo.token}`,
         "Content-Type": "application/json"
       },
       body: {
@@ -42,7 +40,6 @@ class ProviderAbstract {
         ]
       }
     }
-
   }
 
   getRates(addressObject) {
@@ -57,16 +54,15 @@ class ProviderAbstract {
         console.log(response.statusCode);
       }
     });
-
-
   }
-
 }
 
 class CanadaPostProvider extends ProviderAbstract {
 
-  constructor() {
+  constructor(myshippotoken) {
     super();
+    this.options.headers['Authorization'] = `ShippoToken ${myshippotoken}`;
+
     this.getRatesCallback = (arr) => {
       let canadaRates = [];
       arr.forEach((element) => {
@@ -75,14 +71,15 @@ class CanadaPostProvider extends ProviderAbstract {
         }
       })
       console.log(canadaRates);
+      return canadaRates;
     };
+
   }
 
-    getXRates(addressObject) {
-      this.rates(addressObject);
-    }
+  getXRates(addressObject) {
+    this.rates(addressObject);
   }
-
+}
 
 const myAddress = {
   "name": "Adrien Peynichou",
@@ -97,5 +94,4 @@ const myAddress = {
 
 const myCPInstance = new CanadaPostProvider(config.shippo.token)
 
-// const rates = myCPInstance.getRates(myAddress) should return an array of available rates
-myCPInstance.getRates(myAddress);
+myCPInstance.getRates(myAddress); // should return an array of available rates
