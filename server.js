@@ -51,7 +51,7 @@ class ProviderAbstract {
       } else if (response.statusCode == 401) {
         console.log(response.statusCode, 'you failed to authenticate');
       } else {
-        console.log(response.statusCode);
+        console.log(response.statusCode, error);
       }
     });
   }
@@ -79,7 +79,7 @@ class CanadaPostProvider extends ProviderAbstract {
       }
     };
   }
-  
+
 }
 
 const myAddress = {
